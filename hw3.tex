@@ -43,6 +43,44 @@
 
 \section{Linear Regression}
 
+\subsection*{Training Set}
+Running Weka's Linear Regression on the ful training set we obtain the model below:
+
+ \[ t =    -0.1343 * x_{1} +  1.8477 * x_{2} + -0.8966 * x{3} + 4.3608 \]
+
+\noindent And a root mean squared error of $0.1897$. 
+
+\subsection*{Predicting $\hat{t}$}
+
+\begin{align*}
+ x = [3,3,5]  \\
+ \hat{t} = -0.1343 * 3 +  1.8477 * 3 + -0.8966 * 5 + 4.3608  \\
+\hat{t} = 5.018 
+\end{align*}
+
+\subsection*{Comparing weights}
+Computing the weights using Bishop (3.34) $ w = (X^{T}X)^{-1}X^{T}t$  we obtain,
+
+\[w = \begin{bmatrix}
+       4.3608029  \\[0.3em]
+       -0.1342938  \\[0.3em]
+       1.8476838 \\[0.3em]
+       -0.8965848
+     \end{bmatrix} \]
+
+These weights are essentially identical to the ones computed by Weka's Linear Regression, except that Weka's have been rounded to $4^{th}$ decimal place.
+
+\subsection{Permutting the rows of $X$}
+Reordering the examples has no impact on the weights computed with Bishop (3.34)
+\[w_{reordered} = \begin{bmatrix}
+       4.3608029  \\[0.3em]
+       -0.1342938  \\[0.3em]
+       1.8476838 \\[0.3em]
+       -0.8965848
+     \end{bmatrix} \]
+
+It also did not affect the result of Weka's Linear Regression, which remained exactly the same as those of part a. 
+
 \section{Interaction of sample size with the prior}
 
 \section{Logistic Regression}
