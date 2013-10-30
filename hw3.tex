@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{amssymb,amsmath, verbatim}
+\usepackage{titlesec}  
+\usepackage{epsfig}
+\usepackage{placeins}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Footer
+\lfoot{\thepage}
+\rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
+\\\vspace{.14cm}
+\footnotesize grunloh@soe.ucsc.edu, acorredo@ucsc.edu, abhinav@soe.ucsc.eduu}
+
+
+                 
+%\titleformat{\subsection}[runin]{}{}{}{}[] % makes subsections not appear on their own lines
+
+
+%Header
+\newcommand{\header}[5]{
+        \begin{minipage}[h!]{0.63\textwidth}
+                \centering
+                { \LARGE \textbf{ \textsc{#1} } }
+        \end{minipage}
+        \begin{minipage}[h!]{0.37\textwidth}
+                \centering
+                {#2}\\
+                {#3}\\
+        \end{minipage}
+}
+
+\begin{document}
+
+\header{Machine Learning \#3}
+       {Nick Grunloh\\Andrea Corredor\\Abhinav Venkateswar Venkataraman}
+       {11/5/2013}
+\\\\
+
+
+\section{Linear Regression}
+
+\section{Interaction of sample size with the prior}
+
+\section{Logistic Regression}
+
+\section{Gradient of the cross-entropy error}
+
+\section{Perceptron algorithm with noise experiment}
+
+\end{document}
