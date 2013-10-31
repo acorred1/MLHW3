@@ -70,7 +70,7 @@ Computing the weights using Bishop (3.34) $ w = (X^{T}X)^{-1}X^{T}t$  we obtain,
 
 These weights are essentially identical to the ones computed by Weka's Linear Regression, except that Weka's have been rounded to $4^{th}$ decimal place.
 
-\subsection{Permutting the rows of $X$}
+\subsection*{Permutting the rows of $X$}
 Reordering the examples has no impact on the weights computed with Bishop (3.34)
 \[w_{reordered} = \begin{bmatrix}
        4.3608029  \\[0.3em]
@@ -88,5 +88,30 @@ It also did not affect the result of Weka's Linear Regression, which remained ex
 \section{Gradient of the cross-entropy error}
 
 \section{Perceptron algorithm with noise experiment}
+
+\subsection*{Part a}
+Epochs = 2
+Prediction errors = 6
+
+\subsection*{Part b}
+
+Epochs = 2
+Prediction errors = 37
+
+Would you expect it to take more or fewer epochs than part a? Why?
+%I don't see why it would raise it. Does this have something to do with the gap?
+
+\subsection*{Part c}
+
+Which of these will be more accurate on new unseen data? Create a separate test set (with the random noise) and evaluate the accuracy of these three hypotheses on it. Ambitious students may run this experiment multiple times (say 10)and report the average accuracies.
+\\
+Running the experiment 10 times: \\
+Avg. accuracy for $w_{1000}$ = $0.7706$ \\
+Avg. accuracy for $w_{avg}$ = $0.8384$ \\
+Avg. accuracy for $w_{vote}$ = $0.8360$ \\
+
+\noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
+
+
 
 \end{document}
