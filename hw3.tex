@@ -50,8 +50,6 @@ Running Weka's Linear Regression on the ful training set we obtain the model bel
 
 \noindent And a root mean squared error of $0.1897$. 
 
-NICK IS A NOOB
-
 \subsection*{Predicting $\hat{t}$}
 
 \begin{align*}
@@ -98,10 +96,12 @@ Prediction errors = 6
 \subsection*{Part b}
 
 Epochs = 2
-Prediction errors = 37
+Prediction errors = 41
 
 Would you expect it to take more or fewer epochs than part a? Why?
 %I don't see why it would raise it. Does this have something to do with the gap?
+We expect it to take the same number of epochs, because the probability of being labeled plus is about the same as of being labeled minus (?). Quiver (?)
+
 
 \subsection*{Part c}
 
@@ -114,6 +114,12 @@ Avg. accuracy for $w_{vote}$ = $0.8360$ \\
 
 \noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
 
+\section{Appendix}
 
+\begin{tiny}
+
+\verbatiminput{./perceptron.R}
+
+\end{tiny}
 
 \end{document}
