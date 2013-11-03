@@ -1,13 +1,13 @@
 \documentclass{article}
 \usepackage{amssymb,amsmath, verbatim}
-\usepackage{titlesec}  
+%\usepackage{titlesec}  
 \usepackage{epsfig}
-\usepackage{placeins}
+%\usepackage{placeins}
 \usepackage[margin=2cm]{geometry}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{1pt}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{1pt}
 
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
@@ -29,10 +29,10 @@
 
 
 % Footer
-\lfoot{\thepage}
-\rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
-\\\vspace{.14cm}
-\footnotesize grunloh@soe.ucsc.edu, acorredo@ucsc.edu, abhinav@soe.ucsc.eduu}
+%\lfoot{\thepage}
+%\rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
+%\\\vspace{.14cm}
+%\footnotesize grunloh@soe.ucsc.edu, acorredo@ucsc.edu, abhinav@soe.ucsc.eduu}
 
 
                  
@@ -54,7 +54,7 @@
 
 \begin{document}
 
-\header{Machine Learning \#3}
+\header{Machine Learning HW \#3}
        {Nick Grunloh\\Andrea Corredor\\Abhinav Venkateswar Venkataraman}
        {11/5/2013}
 \\\\
@@ -98,7 +98,7 @@ Reordering the examples has no impact on the weights computed with Bishop (3.34)
        -0.8965848
      \end{bmatrix} \]
 
-It also did not affect the result of Weka's Linear Regression, which remained exactly the same as those of part a. 
+It also did not affect the result of Weka's Linear Regression, which remained exactly the same as those of \mbox{part a}. 
 
 \section{Interaction of sample size with the prior}
 
@@ -127,7 +127,7 @@ y_n &= \sigma(\bm{x}_{i}^{T}\bm{w})=\frac{\exp\left\{ a \right\}}{\left( 1+\exp\
 			\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}
 		       \right)
 		       \left(
-			\exp\left\{ a \right\} \left( 1+\exp\left\{ a\right\} \right)^{-1}
+			\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}
 		       \right)\\
 		    &= \sigma(a)\left(1-\sigma(a)\right)\\
 &\nonumber\\
@@ -164,6 +164,7 @@ Avg. accuracy for $w_{vote}$ = $0.8360$ \\
 
 \noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
 
+\clearpage
 \section{Appendix}
 
 \begin{tiny}
