@@ -9,6 +9,25 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{1pt}
 
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bm}
+
+%\usepackage{names}
+
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+\newcommand{\pdiff}[2]{
+        \frac{\partial #1}{\partial #2}
+}
+
+\newcommand{\diff}[2]{
+        \frac{d #1}{d #2}
+}
+
+
 % Footer
 \lfoot{\thepage}
 \rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
@@ -84,9 +103,40 @@ It also did not affect the result of Weka's Linear Regression, which remained ex
 \section{Interaction of sample size with the prior}
 
 \section{Logistic Regression}
+\begin{align*}
+p(1|\bm{x},~\bm{w}) &= \frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\\
+p(0|\bm{x},~\bm{w}) &= 1-p(1|\bm{x},~\bm{w})\\
+		    &= \left(\frac{1+ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\right)-\left(\frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\right)\\
+		    &= \frac{ 1 }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\\
+		    &\nonumber\\
+\ln\left\{ \frac{p(1|\bm{x},~\bm{w})}{p(0|\bm{x},~\bm{w})} \right\} &= \ln \left\{ 
+	\frac{ \frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} } }
+	     { \frac{ 1 }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} } } 
+	\right\}\\
+		    &= \ln\left\{ \exp\left\{ \bm{x}'\bm{w} \right\} \right\}\\
+		    &= \bm{x}'\bm{w}~=~\bm{w}'\bm{x}
+\end{align*}
 
 \section{Gradient of the cross-entropy error}
-
+\begin{align*}
+y_n &= \sigma(\bm{x}_{i}^{T}\bm{w})=\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}\\
+&\nonumber\\
+\diff{\sigma(a)}{a} &= \diff{\exp\left\{ a \right\} \left( 1+\exp\left\{ a\right\} \right)^{-1}}{a}\\
+		    &= \frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)} -
+		       \left( 
+			\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}
+		       \right)
+		       \left(
+			\exp\left\{ a \right\} \left( 1+\exp\left\{ a\right\} \right)^{-1}
+		       \right)\\
+		    &= \sigma(a)\left(1-\sigma(a)\right)\\
+&\nonumber\\
+E(\bm{w}) &= -\sum_{i=1}^N t_i \ln\left\{ \sigma(\bm{x}_{i}^{T} \bm{w}) \right\} + (1-t_i)\ln\left\{1-\sigma(\bm{x}_{i}^{T}\bm{w})\right\}\\
+\nabla_{\bm{w}} E(\bm{w}) &= -\nabla_{\bm{w}}\left[\sum_{i=1}^N t_i \ln\left\{ \sigma(\bm{x}_{i}^{T}\bm{w}) \right\} + (1-t_i)\ln\left\{1-\sigma(\bm{x}_{i}^{T}\bm{w})\right\}\right]\\
+&=-\sum_{i=1}^N t_i \frac{1}{\sigma} \sigma(1-\sigma)\bm{x}_{i} + (1-t_i) \frac{1}{1-\sigma} \left(-\sigma(1-\sigma)\bm{x}_{i}\right)\\
+&=\sum_{i=1}^{N} -t_i \bm{x}_{i} + t_i \sigma \bm{x}_{i} + \sigma \bm{x}_{i} - t_i \sigma \bm{x}_{i}\\
+&=\sum_{i=1}^{N} (\sigma(\bm{x}_{i}^{T}\bm{w}) - t_i)\bm{x}_{i}
+\end{align*}
 \section{Perceptron algorithm with noise experiment}
 
 \subsection*{Part a}
