@@ -102,6 +102,39 @@ It also did not affect the result of Weka's Linear Regression, which remained ex
 
 \section{Interaction of sample size with the prior}
 
+\begin{align*}
+E_{\text{total}} = \frac{1}{2} \sum_{n=1}^{N}\left(  t_{n} - w^{T}\phi\left( x_{n}\right)  \right)^{2} + \frac{\lambda}{2}w^{T} w  
+\end{align*}
+$N$ training points all with $\phi\left( x_{n} \right) = 1$ and $t_{n} = 10$
+
+\subsection*{Part a: Minimizing $w$}
+
+\begin{align*}
+E_{\text{total}} = \frac{1}{2} \sum_{n=1}^{N}\left( 10 - w^{T} 1 \right)^{2} + \frac{\lambda}{2}w^{T} w  \\
+w^{T} = w  \Rightarrow w^{T}w = w^{2} \\
+E_{\text{total}} = \frac{1}{2} \sum_{n=1}^{N}\left( 10 - w \right)^{2} + \frac{\lambda}{2}w^{2} \\
+E_{\text{total}} = \frac{1}{2} \left( 10 - w \right)^{2}N + \frac{\lambda}{2}w^{2} \\
+\frac{\text{d}E}{\text{d}w} = -N\left( 10 -w \right) + \lambda w = 0 \\
+w\left( \lambda + N \right) = 10N \\
+w = \frac{10N}{\lambda + N}
+\end{align*}
+
+\subsection*{Part b}
+For what value of $\lambda$ (as a function of $N$) is the minimizing $w = 5$ ?
+\begin{align*}
+5 = \frac{10N}{\lambda + N} \\
+\lambda + N = 2N \\
+\lambda = N
+\end{align*}
+For fixed $\lambda$, what happens to the minimizing $w$ as $N$ goes to infinity?
+\begin{align*}
+w = \lim_{N \rightarrow \infty} \frac{10N}{\lambda + N} \\
+w = \lim_{N \rightarrow \infty} \frac{10}{\frac{\lambda}{N} + 1} \\
+\Rightarrow w = 10
+\end{align*}
+
+
+
 \section{Logistic Regression}
 \begin{align*}
 p(1|\bm{x},~\bm{w}) &= \frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\\
