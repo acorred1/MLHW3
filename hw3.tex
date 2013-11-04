@@ -175,15 +175,15 @@ E(\bm{w}) &= -\sum_{i=1}^N t_i \ln\left\{ \sigma(\bm{x}_{i}^{T} \bm{w}) \right\}
 \section{Perceptron algorithm with noise experiment}
 
 \subsection*{Part a}
-Epochs = 2
+Epochs = 2 \\
 Prediction errors = 6
 
 \subsection*{Part b}
 
-%Epochs = 2
+Epochs = 2 \\
 Prediction errors = 41
 
-Would you expect it to take more or fewer epochs than part a? Why?
+\noindent Would you expect it to take more or fewer epochs than part a? Why?
 
 \begin{figure}[h!]
 \centering
@@ -222,7 +222,7 @@ $Pr(t=+1)$ only converges to 0.5 as $n\rightarrow\infty$.
 \clearpage
 \subsection*{Part c}
 
-Which of these will be more accurate on new unseen data? Create a separate test set (with the random noise) and evaluate the accuracy of these three hypotheses on it. Ambitious students may run this experiment multiple times (say 10)and report the average accuracies.
+Which of these will be more accurate on new unseen data? Create a separate test set (with the random noise) and evaluate the accuracy of these three hypotheses on it. Ambitious students may run this experiment multiple times (say 10) and report the average accuracies.
 \\
 Running the experiment 10 times: \\
 Avg. accuracy for $w_{1000}$ = $0.7706$ \\
@@ -230,7 +230,7 @@ Avg. accuracy for $w_{avg}$ = $0.8384$ \\
 Avg. accuracy for $w_{vote}$ = $0.8360$ \\
 
 \noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
-
+This is in accordance with our expectations, as with only 2 epochs the algorithm has not terminated, the $w_{1000}$ will not be the most accurate, and any form of averaging will improve the predictions. 
 \clearpage
 \section{Appendix}
 
