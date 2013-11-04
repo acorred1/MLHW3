@@ -194,6 +194,7 @@ The above graph is produced by evaluating this expression for \mbox{$n\in\left\{
 \label{bFig}
 \end{figure}
 
+
 Figure(\ref{bFig}) shows that in part b $Pr(t=+1)$ is allowed to increase above 0.5 (as it was in part a).
 This means that each example is more likely to be labeled $+$. 
 Since $t$ is directly related to the way that we declare a mistake (ie. $(\bm{w\cdot x}_i) t_i \le0$) and the label generating mechanism increases how often $t=+1$; that will mean that more mistakes will occur per epoch. % because $\bm{w}$ and $\bm{x_i}$ are the same as before but $t_i=+1$ more often. % of the examples will be labeled.
@@ -204,6 +205,10 @@ If more mistakes occur per epoch the line predicted by the algorithm will bounce
 For example consider the following graph that explores the relationship between $n$ and the average number of epochs, with all other factors held the same.
 Recall that when $1<n$ the $Pr(t=+1)>0.5$, especially when $n$ is small.
 $Pr(t=+1)$ only converges to 0.5 as $n\rightarrow\infty$.
+\\
+
+Thus, we expect it to take around 2 epochs, as in part a, as the average number of epochs is around 2.1 (see Figure \ref{epoch} at n = 500). Most of the time, a single run of the algorithm will produce 2 epochs and this is because n for our particular case (n=500) is relatively large so the $Pr(t=+)$ is starting to converge back to about 0.5 (as it is in part a). However, the underlying mechanism for producing $Pr(t=+)$ is different from part a.  The only reason that part b and part a are similar is because n=500 is starting to become high enough so that asymptotically pr(t=+) is around 0.5 (however it is slightly higher that 0.5, so average epochs is 2.1). For different values of n, we might expect different outcomes due to the difference in the behavior of $Pr(t=+)$ as related with n, but in our case n is sufficient to give us about the same answer as part a most of the time.
+
 
 \begin{figure}[h!]
 \centering
@@ -214,12 +219,6 @@ Averages are calculated over 100 runs of the algorithm at each $n$ level.
 \label{epoch}
 \end{figure}
 
-%??? including the mistake rates from a and b for comparison would be great to support this theory. I'm not sure where these variables are being tracked can you add them easily Andrea?????
-
-
-
-%I don't see why it would raise it. Does this have something to do with the gap?
-%We expect it to take the same number of epochs, because the probability of being labeled plus is about the same as of being labeled minus (?). Quiver (?)
 
 \subsection*{Part c}
 
@@ -231,7 +230,7 @@ Avg. accuracy for $w_{avg}$ = $0.8384$ \\
 Avg. accuracy for $w_{vote}$ = $0.8360$ \\
 
 \noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
-This is in accordance with our expectations, as with only 2 epochs the algorithm has not terminated, the $w_{1000}$ will not be the most accurate, and any form of averaging will improve the predictions. 
+This is in accordance with our expectations, as with only 2 epochs the algorithm has not terminated the $w_{1000}$ will not be the most accurate, and any form of averaging will improve the predictions. 
 \clearpage
 \section{Appendix}
 
