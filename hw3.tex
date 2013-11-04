@@ -1,19 +1,38 @@
 \documentclass{article}
 \usepackage{amssymb,amsmath, verbatim}
-\usepackage{titlesec}  
+%\usepackage{titlesec}  
 \usepackage{epsfig}
-\usepackage{placeins}
+%\usepackage{placeins}
 \usepackage[margin=2cm]{geometry}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{1pt}
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bm}
+
+%\usepackage{names}
+
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+\newcommand{\pdiff}[2]{
+        \frac{\partial #1}{\partial #2}
+}
+
+\newcommand{\diff}[2]{
+        \frac{d #1}{d #2}
+}
+
 
 % Footer
-\lfoot{\thepage}
-\rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
-\\\vspace{.14cm}
-\footnotesize grunloh@soe.ucsc.edu, acorredo@ucsc.edu, abhinav@soe.ucsc.eduu}
+%\lfoot{\thepage}
+%\rfoot{\vspace{-.8cm} Nick Grunloh, Andrea Corredor, Abhinav Venkateswar Venkataraman
+%\\\vspace{.14cm}
+%\footnotesize grunloh@soe.ucsc.edu, acorredo@ucsc.edu, abhinav@soe.ucsc.eduu}
 
 
                  
@@ -35,7 +54,7 @@
 
 \begin{document}
 
-\header{Machine Learning \#3}
+\header{Machine Learning HW \#3}
        {Nick Grunloh\\Andrea Corredor\\Abhinav Venkateswar Venkataraman}
        {11/5/2013}
 \\\\
@@ -44,7 +63,7 @@
 \section{Linear Regression}
 
 \subsection*{Training Set}
-Running Weka's Linear Regression on the ful training set we obtain the model below:
+Running Weka's Linear Regression on the full training set we obtain the model below:
 
  \[ t =    -0.1343 * x_{1} +  1.8477 * x_{2}  -0.8966 * x_{3} + 4.3608 \]
 
@@ -70,7 +89,7 @@ Computing the weights using Bishop (3.34) $ w = (X^{T}X)^{-1}X^{T}t$  we obtain,
 
 These weights are essentially identical to the ones computed by Weka's Linear Regression, except that Weka's have been rounded to $4^{th}$ decimal place.
 
-\subsection*{Permutting the rows of $X$}
+\subsection*{Permuting the rows of $X$}
 Reordering the examples has no impact on the weights computed with Bishop (3.34)
 \[w_{reordered} = \begin{bmatrix}
        4.3608029  \\[0.3em]
@@ -79,14 +98,47 @@ Reordering the examples has no impact on the weights computed with Bishop (3.34)
        -0.8965848
      \end{bmatrix} \]
 
-It also did not affect the result of Weka's Linear Regression, which remained exactly the same as those of part a. 
+It also did not affect the result of Weka's Linear Regression, which remained exactly the same as those of \mbox{part a}. 
 
 \section{Interaction of sample size with the prior}
 
 \section{Logistic Regression}
+\begin{align*}
+p(1|\bm{x},~\bm{w}) &= \frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\\
+p(0|\bm{x},~\bm{w}) &= 1-p(1|\bm{x},~\bm{w})\\
+		    &= \left(\frac{1+ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\right)-\left(\frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\right)\\
+		    &= \frac{ 1 }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} }\\
+		    &\nonumber\\
+\ln\left\{ \frac{p(1|\bm{x},~\bm{w})}{p(0|\bm{x},~\bm{w})} \right\} &= \ln \left\{ 
+	\frac{ \frac{ \exp\left\{ \bm{x}'\bm{w} \right\} }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} } }
+	     { \frac{ 1 }{ 1+\exp\left\{ \bm{x}'\bm{w} \right\} } } 
+	\right\}\\
+		    &= \ln\left\{ \exp\left\{ \bm{x}'\bm{w} \right\} \right\}\\
+		    &= \bm{x}'\bm{w}~=~\bm{w}'\bm{x}
+\end{align*}
 
 \section{Gradient of the cross-entropy error}
+\begin{align*}
+y_n &= \sigma(\bm{x}_{i}^{T}\bm{w})=\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}\\
+&\nonumber\\
+\diff{\sigma(a)}{a} &= \diff{\exp\left\{ a \right\} \left( 1+\exp\left\{ a\right\} \right)^{-1}}{a}\\
+		    &= \frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)} -
+		       \left( 
+			\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}
+		       \right)
+		       \left(
+			\frac{\exp\left\{ a \right\}}{\left( 1+\exp\left\{ a\right\} \right)}
+		       \right)\\
+		    &= \sigma(a)\left(1-\sigma(a)\right)\\
+&\nonumber\\
+E(\bm{w}) &= -\sum_{i=1}^N t_i \ln\left\{ \sigma(\bm{x}_{i}^{T} \bm{w}) \right\} + (1-t_i)\ln\left\{1-\sigma(\bm{x}_{i}^{T}\bm{w})\right\}\\
+\nabla_{\bm{w}} E(\bm{w}) &= -\nabla_{\bm{w}}\left[\sum_{i=1}^N t_i \ln\left\{ \sigma(\bm{x}_{i}^{T}\bm{w}) \right\} + (1-t_i)\ln\left\{1-\sigma(\bm{x}_{i}^{T}\bm{w})\right\}\right]\\
+&=-\sum_{i=1}^N t_i \frac{1}{\sigma} \sigma(1-\sigma)\bm{x}_{i} + (1-t_i) \frac{1}{1-\sigma} \left(-\sigma(1-\sigma)\bm{x}_{i}\right)\\
+&=\sum_{i=1}^{N} -t_i \bm{x}_{i} + t_i \sigma \bm{x}_{i} + \sigma \bm{x}_{i} - t_i \sigma \bm{x}_{i}\\
+&=\sum_{i=1}^{N} (\sigma(\bm{x}_{i}^{T}\bm{w}) - t_i)\bm{x}_{i}
+\end{align*}
 
+\clearpage
 \section{Perceptron algorithm with noise experiment}
 
 \subsection*{Part a}
@@ -95,14 +147,46 @@ Prediction errors = 6
 
 \subsection*{Part b}
 
-Epochs = 2
+%Epochs = 2
 Prediction errors = 41
 
 Would you expect it to take more or fewer epochs than part a? Why?
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{bFig.pdf}
+\caption{Since a $t=+1$ if at least $\frac{n}{2}$ of the instances of a given feature are $+1$, then the \mbox{$Pr(t=+1)=\sum_{i=\frac{n}{2}}^n Binomial(i|n,\frac{1}{2})$.}
+The above graph is produced by evaluating this expression for \mbox{$n\in\left\{1,2,3,...,1000\right\}$.}
+}
+\label{bFig}
+\end{figure}
+
+Figure(\ref{bFig}) shows that $Pr(t=+1)$ increases above 0.5 (as it was in part a) and thus an example is more likely to be labeled $+$. 
+Since $t$ is directly related to the way that we declare a mistake (ie. $(\bm{w\cdot x}_i) t_i \le0$), and the label generating mechanism increases how often $t=+1$ that will mean that more mistakes will occur per epoch because $\bm{w}$ and $\bm{x_i}$ are the same as before but $t_i=+1$ more often. % of the examples will be labeled.
+%If we start with $w_0=\bm{0}$ then 
+%The number of epochs could then increase because of the decrepency in the ratio $\frac{\#+}{\#-}$ could mean that the algorithm make worse and worse guesses in its learning process as it makes more mistakes. %this ratio is more and more skewed from 50/50.     
+%The algorithm would converge more slowly because the guesses produced in each epoch could be much farther from valid separators due to the sw
+For example consider the following graph that explores the relationship between $n$ and the average number of epochs, with all of the factors held the same.
+Recall that when $1<n\le1000$ the $Pr(t=+1)>0.5$, especially when $n$ is small.
+$Pr(t=+1)$ only converges to 0.5 as $n\rightarrow\infty$.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{epochsB.pdf}
+%\caption{Since a $t=+1$ if at least $\frac{n}{2}$ of the instances of a given feature
+%The above graph is produced by evaluating this expression for $n\in\left\{1,2,3,...,10
+%}
+\label{epoch}
+\end{figure}
+
+??? including the mistake rates from a and b for comparison would be great to support this theory. I'm not sure where these variables are being tracked can you add them easily Andrea?????
+
+
+
 %I don't see why it would raise it. Does this have something to do with the gap?
-We expect it to take the same number of epochs, because the probability of being labeled plus is about the same as of being labeled minus (?). Quiver (?)
+%We expect it to take the same number of epochs, because the probability of being labeled plus is about the same as of being labeled minus (?). Quiver (?)
 
-
+\clearpage
 \subsection*{Part c}
 
 Which of these will be more accurate on new unseen data? Create a separate test set (with the random noise) and evaluate the accuracy of these three hypotheses on it. Ambitious students may run this experiment multiple times (say 10)and report the average accuracies.
@@ -114,6 +198,7 @@ Avg. accuracy for $w_{vote}$ = $0.8360$ \\
 
 \noindent $w_{avg}$ and $w_{vote}$ are consistently superior to $w_{1000}$, with $w_{avg}$ slightly superior to $w_{vote}$.
 
+\clearpage
 \section{Appendix}
 
 \begin{tiny}
